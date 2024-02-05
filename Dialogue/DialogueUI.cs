@@ -13,6 +13,8 @@ namespace RPG.UI
         [SerializeField] TextMeshProUGUI AIText;
         [SerializeField] Image AIImage;
         [SerializeField] Button nextButton;
+        [SerializeField] Transform choiceRoot;
+        [SerializeField] GameObject choicePrefab;
 
         // Start is called before the first frame update
         void Start()
@@ -34,6 +36,13 @@ namespace RPG.UI
         {
             AIText.text = playerConversant.GetText();
             nextButton.gameObject.SetActive(playerConversant.HasNext());
+            choiceRoot.DetachChildren();
+            foreach (string choiceText in playerConversant.GetChoices())
+            {
+                GameObject choiceInstance = Instantiate(choicePrefab, choiceRoot);
+                var textComp = choiceInstance.GetComponentInChildren<TextMeshProUGUI>();
+                textComp.text = choiceText;
+            }
         }
     }
 }
