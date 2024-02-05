@@ -60,9 +60,10 @@ MonoBehaviour:
   m_Name: d310626f-081b-4dd6-acbf-c3b51267704b
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 1
-  text: 
+  text: "\u3075\u3075\u30FC\u3093"
   image: {fileID: 0}
-  children: []
+  children:
+  - 5b9e102a-6cad-46ea-a1fa-4b36291e8eea
   rect:
     serializedVersion: 2
     x: 384
@@ -86,6 +87,29 @@ MonoBehaviour:
   - {fileID: -8573064866877425325}
   - {fileID: 7285811644770131793}
   - {fileID: -1882771188676946740}
+  - {fileID: 1119968374338072480}
+--- !u!114 &1119968374338072480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
+  m_Name: 5b9e102a-6cad-46ea-a1fa-4b36291e8eea
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: "\u78BA\u304B\u306B\u306D"
+  image: {fileID: 0}
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 634
+    y: 213
+    width: 200
+    height: 130
 --- !u!114 &7285811644770131793
 MonoBehaviour:
   m_ObjectHideFlags: 0
