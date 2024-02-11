@@ -9,24 +9,30 @@ namespace RPG.Dialogue
     public class PlayerConversant : MonoBehaviour
     {
         //[SerializeField] Dialogue currentDialogue;
-        [SerializeField] Dialogue testDialogue;
+
         Dialogue currentDialogue;
         DialogueNode currentNode = null;
+        AIConversant currentConversant = null;
         bool isChoosing = false;
 
         public event Action onConversationUpdated;
 
-        IEnumerator Start()
+        public void StartDialogue(AIConversant newConversant, Dialogue newDialogue)
         {
-            yield return new WaitForSeconds(2);
-            StartDialogue(testDialogue);
-        }
-
-        public void StartDialogue(Dialogue newDialogue)
-        {
+            currentConversant = newConversant;
             currentDialogue = newDialogue;
             //{
             currentNode = currentDialogue.GetRootNode();
+            TriggerEnterAction();
+            onConversationUpdated();
+        }
+        public void Quit()
+        {
+            currentDialogue = null;
+            TriggerExitAction();
+            currentNode = null;
+            isChoosing = false;
+            currentConversant = null;
             onConversationUpdated();
         }
 
@@ -49,7 +55,7 @@ namespace RPG.Dialogue
             return currentNode.GetText();
         }
 
-        public IEnumerable<DialogueNode> GetChoices()
+        public IEnumerable<DialogueNode> GetChoices()//プレイヤーが選択できる選択肢を取得
         {
             return currentDialogue.GetPlayerChildren(currentNode);
         }
@@ -57,38 +63,63 @@ namespace RPG.Dialogue
         public void SelectChoice(DialogueNode chosenNode)
         {
             currentNode = chosenNode;
+            TriggerEnterAction();
             isChoosing = false;
             Next();
         }
 
         public void Next()
         {
+            // 現在のノードがプレイヤーのレスポンスを持っているかどうかを確認
             int numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();
             if (numPlayerResponses > 0)
             {
+                // プレイヤーのレスポンスがある場合、選択モードに移行して会話更新イベントを呼び出す
                 isChoosing = true;
+                TriggerExitAction();
                 onConversationUpdated();
                 return;
             }
 
+            // プレイヤーのレスポンスがない場合、AIのレスポンスからランダムに次のノードを選択する
             DialogueNode[] children = currentDialogue.GetAIChildren(currentNode).ToArray();
             int randomIndex = UnityEngine.Random.Range(0, children.Count());
+            TriggerExitAction();
             currentNode = children[randomIndex];
+            TriggerEnterAction();
             onConversationUpdated();
         }
 
         public bool HasNext()
         {
+            // 現在のノードに子ノードがあるかどうかを確認する
             return currentDialogue.GetAllChildren(currentNode).Count() > 0;
         }
-        public Sprite GetImage()
-        {
-            if (currentDialogue == null)
-            {
-                return null;
-            }
 
-            return currentDialogue.GetRootNode().GetImage();
+        private void TriggerEnterAction()
+        {
+            if (currentNode != null)
+            {
+                TriggerAction(currentNode.GetOnEnterAction());
+            }
+        }
+
+        private void TriggerExitAction()
+        {
+            if (currentNode != null)
+            {
+                TriggerAction(currentNode.GetOnExitAction());
+            }
+        }
+
+        private void TriggerAction(string action)
+        {
+            if (action == "") return;
+
+            foreach (DialogueTrigger trigger in currentConversant.GetComponents<DialogueTrigger>())
+            {
+                trigger.Trigger(action);
+            }
         }
     }
 }

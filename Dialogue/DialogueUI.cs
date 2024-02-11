@@ -16,26 +16,25 @@ namespace RPG.UI
         [SerializeField] GameObject AIResponse;
         [SerializeField] Transform choiceRoot;
         [SerializeField] GameObject choicePrefab;
+        [SerializeField] Button quitButton;
 
         // Start is called before the first frame update
         void Start()
         {
             playerConversant = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>();
             playerConversant.onConversationUpdated += UpdateUI;
-            nextButton.onClick.AddListener(Next);
+            nextButton.onClick.AddListener(() => playerConversant.Next());
+            quitButton.onClick.AddListener(() => playerConversant.Quit());
             UpdateUI();
-            AIImage.sprite = playerConversant.GetImage();
+            //AIImage.sprite = playerConversant.GetImage(); エラーの原因になっているので一時的にコメントアウト
         }
 
         // Update is called once per frame
-        void Next()
-        {
-            playerConversant.Next();
 
-        }
 
         void UpdateUI()
         {
+            gameObject.SetActive(playerConversant.IsActive());
             if (!playerConversant.IsActive())
             {
                 return;
@@ -44,13 +43,6 @@ namespace RPG.UI
             choiceRoot.gameObject.SetActive(playerConversant.IsChoosing());
             if (playerConversant.IsChoosing())
             {
-                // choiceRoot.DetachChildren();
-                // foreach (DialogueNode choice in playerConversant.GetChoices())
-                // {
-                //     GameObject choiceInstance = Instantiate(choicePrefab, choiceRoot);
-                //     var textComp = choiceInstance.GetComponentInChildren<TextMeshProUGUI>();
-                //     textComp.text = choice.GetText();
-                // }
                 BuildChoiceList();
             }
             else
@@ -69,11 +61,7 @@ namespace RPG.UI
                 var textComp = choiceInstance.GetComponentInChildren<TextMeshProUGUI>();
                 textComp.text = choice.GetText();
                 Button button = choiceInstance.GetComponentInChildren<Button>();
-                button.onClick.AddListener(() =>
-                {
-                    playerConversant.SelectChoice(choice);
-
-                });
+                button.onClick.AddListener(() => { playerConversant.SelectChoice(choice); });
             }
         }
     }
