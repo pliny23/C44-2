@@ -21,7 +21,7 @@ namespace RPG.Dialogue
         {
             currentConversant = newConversant;
             currentDialogue = newDialogue;
-            //{
+
             currentNode = currentDialogue.GetRootNode();
             TriggerEnterAction();
             onConversationUpdated();
@@ -51,8 +51,17 @@ namespace RPG.Dialogue
             {
                 return "";
             }
-
             return currentNode.GetText();
+        }
+
+        public Sprite GetImage()
+        {
+            Sprite image = currentNode.GetImage();
+            if (image != null)//次のノードのImageがnullでない場合
+            {
+                return image;
+            }
+            return currentNode.GetImage();
         }
 
         public IEnumerable<DialogueNode> GetChoices()//プレイヤーが選択できる選択肢を取得
@@ -60,21 +69,21 @@ namespace RPG.Dialogue
             return currentDialogue.GetPlayerChildren(currentNode);
         }
 
-        public void SelectChoice(DialogueNode chosenNode)
+        public void SelectChoice(DialogueNode chosenNode)//選択肢を選んだ後
         {
-            currentNode = chosenNode;
+            currentNode = chosenNode;// 選択されたノードを現在のノードとして設定
             TriggerEnterAction();
-            isChoosing = false;
+            isChoosing = false;// 選択モードを終了
             Next();
         }
 
         public void Next()
         {
-            // 現在のノードがプレイヤーのレスポンスを持っているかどうかを確認
+            // numPlayerResponses　＝現在のノードが持つプレイヤーが選択できる選択肢の数
             int numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();
-            if (numPlayerResponses > 0)
+            if (numPlayerResponses > 0)//現在のノードがプレイヤーの選択肢を持っているか
             {
-                // プレイヤーのレスポンスがある場合、選択モードに移行して会話更新イベントを呼び出す
+                // 更新イベントを呼び出す
                 isChoosing = true;
                 TriggerExitAction();
                 onConversationUpdated();
@@ -95,7 +104,6 @@ namespace RPG.Dialogue
             // 現在のノードに子ノードがあるかどうかを確認する
             return currentDialogue.GetAllChildren(currentNode).Count() > 0;
         }
-
         private void TriggerEnterAction()
         {
             if (currentNode != null)

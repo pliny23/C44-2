@@ -14,11 +14,10 @@ namespace RPG.UI
         [SerializeField] Image AIImage;
         [SerializeField] Button nextButton;
         [SerializeField] GameObject AIResponse;
-        [SerializeField] Transform choiceRoot;
+        [SerializeField] Transform choiceRoot;//選択肢ボタンを入れる矩形
         [SerializeField] GameObject choicePrefab;
         [SerializeField] Button quitButton;
 
-        // Start is called before the first frame update
         void Start()
         {
             playerConversant = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>();
@@ -26,33 +25,30 @@ namespace RPG.UI
             nextButton.onClick.AddListener(() => playerConversant.Next());
             quitButton.onClick.AddListener(() => playerConversant.Quit());
             UpdateUI();
-            //AIImage.sprite = playerConversant.GetImage(); エラーの原因になっているので一時的にコメントアウト
         }
-
-        // Update is called once per frame
-
 
         void UpdateUI()
         {
-            gameObject.SetActive(playerConversant.IsActive());
+            gameObject.SetActive(playerConversant.IsActive());//playerConversantが会話の更新を通知する際に、UpdateUIメソッドが呼び出される
             if (!playerConversant.IsActive())
             {
-                return;
+                return;// false の場合には、以降の処理をスキップしてメソッドの実行を終了
             }
-            AIResponse.SetActive(!playerConversant.IsChoosing());
-            choiceRoot.gameObject.SetActive(playerConversant.IsChoosing());
+            AIResponse.SetActive(!playerConversant.IsChoosing());//AI が発言中である場合は、AIResponse をアクティブに
+            choiceRoot.gameObject.SetActive(playerConversant.IsChoosing());//つまりプレイヤーが選択中である場合は、choiceRoot をアクティブに
             if (playerConversant.IsChoosing())
             {
-                BuildChoiceList();
+                BuildChoiceList();//選択肢のリスト構築
             }
-            else
+            else//選択中でない場合は
             {
                 AIText.text = playerConversant.GetText();
+                AIImage.sprite = playerConversant.GetImage(); //画像の更新
                 nextButton.gameObject.SetActive(playerConversant.HasNext());
             }
         }
 
-        private void BuildChoiceList()
+        private void BuildChoiceList()//選択肢のリスト構築
         {
             choiceRoot.DetachChildren();
             foreach (DialogueNode choice in playerConversant.GetChoices())
@@ -64,5 +60,6 @@ namespace RPG.UI
                 button.onClick.AddListener(() => { playerConversant.SelectChoice(choice); });
             }
         }
+
     }
 }
