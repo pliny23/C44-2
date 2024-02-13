@@ -36,7 +36,7 @@ namespace RPG.Dialogue
             return nodes[0];
         }
 
-        public IEnumerable<DialogueNode> GetAllChildren(DialogueNode parentNode)
+        public IEnumerable<DialogueNode> GetAllChildren(DialogueNode parentNode)//全部の子ノード
         {
             foreach (string childID in parentNode.GetChildren())
             {
@@ -46,7 +46,7 @@ namespace RPG.Dialogue
                 }
             }
         }
-        public IEnumerable<DialogueNode> GetPlayerChildren(DialogueNode currentNode)
+        public IEnumerable<DialogueNode> GetPlayerChildren(DialogueNode currentNode)//プレイヤーの子ノード
         {
             foreach (DialogueNode node in GetAllChildren(currentNode))
             {
@@ -58,7 +58,7 @@ namespace RPG.Dialogue
         }
 
 
-        public IEnumerable<DialogueNode> GetAIChildren(DialogueNode currentNode)
+        public IEnumerable<DialogueNode> GetAIChildren(DialogueNode currentNode)//AIの子ノード
         {
             foreach (DialogueNode node in GetAllChildren(currentNode))
             {

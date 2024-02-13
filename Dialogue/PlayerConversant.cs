@@ -79,9 +79,23 @@ namespace RPG.Dialogue
 
         public void Next()
         {
-            // numPlayerResponses　＝現在のノードが持つプレイヤーが選択できる選択肢の数
-            int numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();
-            if (numPlayerResponses > 0)//現在のノードがプレイヤーの選択肢を持っているか
+            // 現在のノードが持つプレイヤーが選択できる選択肢の数
+            int numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();//GetPlayerChildrenはDialogue.csで定義
+            if (numPlayerResponses == 1)//numPlayerResponsesが1の時
+            {
+                DialogueNode[] Children = currentDialogue.GetPlayerChildren(currentNode).ToArray();
+                if (Children.Length > 0)
+                {
+                    // playerChildrenが空でない場合の処理
+                }
+                // int randomIndex = UnityEngine.Random.Range(0, children.Count());
+                // TriggerExitAction();
+                // currentNode = children[randomIndex];//エラー箇所
+                // TriggerEnterAction();
+                // onConversationUpdated();
+            }
+
+            else if (numPlayerResponses > 1)
             {
                 // 更新イベントを呼び出す
                 isChoosing = true;
@@ -89,12 +103,16 @@ namespace RPG.Dialogue
                 onConversationUpdated();
                 return;
             }
+            // else
+            // {
+            //     DialogueNode[] children = currentDialogue.GetAIChildren(currentNode).ToArray();
+            // }
 
             // プレイヤーのレスポンスがない場合、AIのレスポンスからランダムに次のノードを選択する
             DialogueNode[] children = currentDialogue.GetAIChildren(currentNode).ToArray();
             int randomIndex = UnityEngine.Random.Range(0, children.Count());
             TriggerExitAction();
-            currentNode = children[randomIndex];
+            currentNode = children[randomIndex];//エラー箇所
             TriggerEnterAction();
             onConversationUpdated();
         }

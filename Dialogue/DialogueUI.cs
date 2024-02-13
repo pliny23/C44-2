@@ -27,12 +27,12 @@ namespace RPG.UI
             UpdateUI();
         }
 
-        void UpdateUI()
+        void UpdateUI()//playerConversantが会話の更新を通知すると、UpdateUIメソッドが呼び出される
         {
-            gameObject.SetActive(playerConversant.IsActive());//playerConversantが会話の更新を通知する際に、UpdateUIメソッドが呼び出される
+            gameObject.SetActive(playerConversant.IsActive());//DialogueUIを表示
             if (!playerConversant.IsActive())
             {
-                return;// false の場合には、以降の処理をスキップしてメソッドの実行を終了
+                return;//playerConversantがアクティブでない場合は処理をスキップして終了
             }
             AIResponse.SetActive(!playerConversant.IsChoosing());//AI が発言中である場合は、AIResponse をアクティブに
             choiceRoot.gameObject.SetActive(playerConversant.IsChoosing());//つまりプレイヤーが選択中である場合は、choiceRoot をアクティブに
