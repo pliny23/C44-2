@@ -66,7 +66,7 @@ namespace RPG.Dialogue
 
         public IEnumerable<DialogueNode> GetChoices()//プレイヤーが選択できる選択肢を取得
         {
-            return currentDialogue.GetPlayerChildren(currentNode);
+            return currentDialogue.GetPlayerChildren(currentNode);//GetPlayerChildrenはDialogue.csで定義
         }
 
         public void SelectChoice(DialogueNode chosenNode)//選択肢を選んだ後
@@ -79,40 +79,22 @@ namespace RPG.Dialogue
 
         public void Next()
         {
-            // 現在のノードが持つプレイヤーが選択できる選択肢の数
-            int numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();//GetPlayerChildrenはDialogue.csで定義
-            if (numPlayerResponses == 1)//numPlayerResponsesが1の時
+            // 現在のノードがプレイヤーのレスポンスを持っているかどうかを確認
+            int numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();
+            if (numPlayerResponses > 0)
             {
-                DialogueNode[] Children = currentDialogue.GetPlayerChildren(currentNode).ToArray();
-                if (Children.Length > 0)
-                {
-                    // playerChildrenが空でない場合の処理
-                }
-                // int randomIndex = UnityEngine.Random.Range(0, children.Count());
-                // TriggerExitAction();
-                // currentNode = children[randomIndex];//エラー箇所
-                // TriggerEnterAction();
-                // onConversationUpdated();
-            }
-
-            else if (numPlayerResponses > 1)
-            {
-                // 更新イベントを呼び出す
+                // プレイヤーのレスポンスがある場合、選択モードに移行して会話更新イベントを呼び出す
                 isChoosing = true;
                 TriggerExitAction();
                 onConversationUpdated();
                 return;
             }
-            // else
-            // {
-            //     DialogueNode[] children = currentDialogue.GetAIChildren(currentNode).ToArray();
-            // }
 
             // プレイヤーのレスポンスがない場合、AIのレスポンスからランダムに次のノードを選択する
             DialogueNode[] children = currentDialogue.GetAIChildren(currentNode).ToArray();
             int randomIndex = UnityEngine.Random.Range(0, children.Count());
             TriggerExitAction();
-            currentNode = children[randomIndex];//エラー箇所
+            currentNode = children[randomIndex];
             TriggerEnterAction();
             onConversationUpdated();
         }

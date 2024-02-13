@@ -46,7 +46,7 @@ namespace RPG.Dialogue
                 }
             }
         }
-        public IEnumerable<DialogueNode> GetPlayerChildren(DialogueNode currentNode)//プレイヤーの子ノード
+        public IEnumerable<DialogueNode> GetPlayerChildren(DialogueNode currentNode)//IsPlayerSpeakingに設定されたノードだけを選別、取得する
         {
             foreach (DialogueNode node in GetAllChildren(currentNode))
             {
@@ -58,7 +58,7 @@ namespace RPG.Dialogue
         }
 
 
-        public IEnumerable<DialogueNode> GetAIChildren(DialogueNode currentNode)//AIの子ノード
+        public IEnumerable<DialogueNode> GetAIChildren(DialogueNode currentNode)//IsPlayerSpeakingに設定されていないノードだけを選別、取得する
         {
             foreach (DialogueNode node in GetAllChildren(currentNode))
             {

@@ -35,7 +35,7 @@ namespace RPG.UI
                 return;//playerConversantがアクティブでない場合は処理をスキップして終了
             }
             AIResponse.SetActive(!playerConversant.IsChoosing());//AI が発言中である場合は、AIResponse をアクティブに
-            choiceRoot.gameObject.SetActive(playerConversant.IsChoosing());//つまりプレイヤーが選択中である場合は、choiceRoot をアクティブに
+            choiceRoot.gameObject.SetActive(playerConversant.IsChoosing());//プレイヤーが選択中である場合は、choiceRoot をアクティブに
             if (playerConversant.IsChoosing())
             {
                 BuildChoiceList();//選択肢のリスト構築
