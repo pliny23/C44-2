@@ -43,7 +43,10 @@ namespace RPG.UI
             else//選択中でない場合は
             {
                 AIText.text = playerConversant.GetText();
-                AIImage.sprite = playerConversant.GetImage(); //画像の更新
+                if (playerConversant.GetImage() != null)
+                {
+                    AIImage.sprite = playerConversant.GetImage(); //画像の更新
+                }
                 nextButton.gameObject.SetActive(playerConversant.HasNext());
             }
         }

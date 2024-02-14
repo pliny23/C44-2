@@ -56,11 +56,7 @@ namespace RPG.Dialogue
 
         public Sprite GetImage()
         {
-            Sprite image = currentNode.GetImage();
-            if (image != null)//次のノードのImageがnullでない場合
-            {
-                return image;
-            }
+
             return currentNode.GetImage();
         }
 

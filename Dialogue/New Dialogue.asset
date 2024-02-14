@@ -211,14 +211,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
   m_Name: e2380b9a-03be-4642-a72b-61f505f79222
   m_EditorClassIdentifier: 
-  isPlayerSpeaking: 1
+  isPlayerSpeaking: 0
   text: "\u3069\u3046\u3082"
   image: {fileID: 0}
   children:
   - 19f5faf1-4cac-4c13-9646-13688a3233e7
   rect:
     serializedVersion: 2
-    x: 932
+    x: 934
     y: 271
     width: 200
     height: 130

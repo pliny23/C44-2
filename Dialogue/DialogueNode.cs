@@ -73,8 +73,9 @@ namespace RPG.Dialogue
                 EditorUtility.SetDirty(this);
             }
         }
-                public void SetImage(Sprite newImage)
+        public void SetImage(Sprite newImage)
         {
+           
             if (newImage != image)
             {
                 Undo.RecordObject(this, "Update Dialogue Image");
