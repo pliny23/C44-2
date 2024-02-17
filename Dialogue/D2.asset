@@ -38,7 +38,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
   text: "\u3078\u30FC\u3069\u3046\u3067\u3082\u3044\u3044"
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 6c1f8fe6b8c3d5543a4d2fdd3f4499c9, type: 3}
   children:
   - 7ffbbe23-6a66-401d-bc4d-a0be1e86bf35
   rect:

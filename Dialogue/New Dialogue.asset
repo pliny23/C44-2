@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 1
   text: "\u3084\u3041\u3001\u3044\u3044\u5929\u6C17\u3060\u306D"
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 6c1f8fe6b8c3d5543a4d2fdd3f4499c9, type: 3}
   children:
   - f08cb20b-5b66-4db6-be5a-3ca9558bea42
   rect:
     serializedVersion: 2
     x: 379
-    y: 52
+    y: 53
     width: 200
     height: 130
   onEnterAction: 
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
   text: "\u9078\u629E\u80A2\u30E9\u30B9\u30C8\uFF12"
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 89192c0783f7ea24685ebcb4ab3690c3, type: 3}
   children: []
   rect:
     serializedVersion: 2
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
   text: "\u6628\u65E5\u304B\u3089\u305A\u3063\u3068\u96E8\u3060\u3088"
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 6c1f8fe6b8c3d5543a4d2fdd3f4499c9, type: 3}
   children:
   - cb4fc720-43b1-4bc7-b828-3b66b0950ef0
   - bf46ba04-0200-449a-b760-d30fc8e4607c
