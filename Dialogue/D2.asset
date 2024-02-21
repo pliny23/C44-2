@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: 25c933e9-4b21-4952-a011-7d7a2b5b6de2
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
+  isFullImage: 0
   text: "\u3046\u308C\u3057\u3044\uFF1F"
-  image: {fileID: 0}
-  children: []
+  winL: 0
+  winR: 0
+  winN: 0
+  imageL: {fileID: 0}
+  imageR: {fileID: 0}
+  fullImage: {fileID: 0}
+  children:
+  - b8594082-e0c6-4a6d-8745-dc0f3f372c2c
   rect:
     serializedVersion: 2
     x: 1414
@@ -37,8 +44,14 @@ MonoBehaviour:
   m_Name: b700b029-d4ba-45bb-99c5-73ef970223da
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
+  isFullImage: 0
   text: "\u3078\u30FC\u3069\u3046\u3067\u3082\u3044\u3044"
-  image: {fileID: 21300000, guid: 6c1f8fe6b8c3d5543a4d2fdd3f4499c9, type: 3}
+  winL: 0
+  winR: 0
+  winN: 0
+  imageL: {fileID: 0}
+  imageR: {fileID: 0}
+  fullImage: {fileID: 0}
   children:
   - 7ffbbe23-6a66-401d-bc4d-a0be1e86bf35
   rect:
@@ -62,8 +75,14 @@ MonoBehaviour:
   m_Name: 7ffbbe23-6a66-401d-bc4d-a0be1e86bf35
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 1
+  isFullImage: 0
   text: "\u305D\u3093\u306A\u30FB\u30FB\u30FB"
-  image: {fileID: 0}
+  winL: 0
+  winR: 0
+  winN: 0
+  imageL: {fileID: 0}
+  imageR: {fileID: 0}
+  fullImage: {fileID: 0}
   children:
   - 25c933e9-4b21-4952-a011-7d7a2b5b6de2
   rect:
@@ -87,8 +106,14 @@ MonoBehaviour:
   m_Name: 3d5c1bef-0ae3-44ca-a63a-e1971a703d02
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 1
+  isFullImage: 0
   text: "\u3084\u3041\u3044\u3044\u5929\u6C17\u3060\u306D"
-  image: {fileID: 0}
+  winL: 0
+  winR: 0
+  winN: 0
+  imageL: {fileID: 0}
+  imageR: {fileID: 0}
+  fullImage: {fileID: 0}
   children:
   - d3570d6e-3786-4175-8a25-c120dfac2607
   rect:
@@ -112,8 +137,14 @@ MonoBehaviour:
   m_Name: aad4cb13-6888-4d31-9c52-bc57b552379e
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 1
+  isFullImage: 0
   text: "\u3053\u3093\u306B\u3061\u306F\uFF01"
-  image: {fileID: 21300000, guid: 89192c0783f7ea24685ebcb4ab3690c3, type: 3}
+  winL: 0
+  winR: 0
+  winN: 0
+  imageL: {fileID: 0}
+  imageR: {fileID: 0}
+  fullImage: {fileID: 0}
   children:
   - 3d5c1bef-0ae3-44ca-a63a-e1971a703d02
   rect:
@@ -143,6 +174,7 @@ MonoBehaviour:
   - {fileID: -7459086572740128040}
   - {fileID: -6257387569305607231}
   - {fileID: -8735148076833068489}
+  - {fileID: 5759664420213062971}
 --- !u!114 &3972724012390559288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,8 +188,14 @@ MonoBehaviour:
   m_Name: d3570d6e-3786-4175-8a25-c120dfac2607
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
+  isFullImage: 0
   text: "\u6628\u65E5\u306F\u96E8\u3060\u3063\u305F\u3088"
-  image: {fileID: 0}
+  winL: 0
+  winR: 0
+  winN: 0
+  imageL: {fileID: 0}
+  imageR: {fileID: 0}
+  fullImage: {fileID: 0}
   children:
   - b700b029-d4ba-45bb-99c5-73ef970223da
   rect:
@@ -166,5 +204,35 @@ MonoBehaviour:
     y: 82
     width: 200
     height: 130
+  onEnterAction: 
+  onExitAction: 
+--- !u!114 &5759664420213062971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
+  m_Name: b8594082-e0c6-4a6d-8745-dc0f3f372c2c
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  isFullImage: 1
+  text: 
+  winL: 1
+  winR: 0
+  winN: 0
+  imageL: {fileID: 0}
+  imageR: {fileID: 0}
+  fullImage: {fileID: 0}
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 1689
+    y: 67
+    width: 220
+    height: 135
   onEnterAction: 
   onExitAction: 
