@@ -10,13 +10,19 @@ namespace RPG.Dialogue
         [SerializeField]
         bool isPlayerSpeaking = false;
         [SerializeField]
+        bool isFullImage = false;
+        [SerializeField]
         string text;
         [SerializeField]
-        Sprite image;
+        Sprite imageL;
+        [SerializeField]
+        Sprite imageR;
+        [SerializeField]
+        Sprite fullImage;
         [SerializeField]
         List<string> children = new List<string>();
         [SerializeField]
-        Rect rect = new Rect(0, 0, 200, 130);//エディタノードのサイズ
+        Rect rect = new Rect(0, 0, 220, 135);//エディタノードのサイズ
         [SerializeField]
         string onEnterAction;
         [SerializeField]
@@ -24,16 +30,38 @@ namespace RPG.Dialogue
 
         public Rect GetRect()
         {
-            return rect;
+            if (isPlayerSpeaking)
+            {
+                return new Rect(rect.position.x, rect.position.y, rect.width, 62);//選択肢ノードの高さ
+            }
+            if (isFullImage)
+            {
+                return new Rect(rect.position.x, rect.position.y, rect.width, 150);//一枚絵ノードの高さ
+            }
+            else
+            {
+                return rect;
+            }
         }
 
         public string GetText()
         {
             return text;
         }
-        public Sprite GetImage()
+
+        public Sprite GetImageL()
         {
-            return image;
+            return imageL;
+        }
+
+        public Sprite GetImageR()
+        {
+            return imageR;
+        }
+
+        public Sprite GetFullImage()
+        {
+            return fullImage;
         }
 
         public List<string> GetChildren()
@@ -44,6 +72,11 @@ namespace RPG.Dialogue
         public bool IsPlayerSpeaking()
         {
             return isPlayerSpeaking;
+        }
+
+        public bool IsFullImage()
+        {
+            return isFullImage;
         }
 
         public string GetOnEnterAction()
@@ -73,13 +106,33 @@ namespace RPG.Dialogue
                 EditorUtility.SetDirty(this);
             }
         }
-        public void SetImage(Sprite newImage)
+
+        public void SetImageL(Sprite newImageL)
         {
-           
-            if (newImage != image)
+            if (newImageL != imageL)
             {
-                Undo.RecordObject(this, "Update Dialogue Image");
-                image = newImage;
+                Undo.RecordObject(this, "Update Dialogue ImageL");
+                imageL = newImageL;
+                EditorUtility.SetDirty(this);
+            }
+        }
+
+        public void SetImageR(Sprite newImageR)
+        {
+            if (newImageR != imageR)
+            {
+                Undo.RecordObject(this, "Update Dialogue ImageR");
+                imageR = newImageR;
+                EditorUtility.SetDirty(this);
+            }
+        }
+
+        public void SetFullImage(Sprite newFullImage)
+        {
+            if (newFullImage != fullImage)
+            {
+                Undo.RecordObject(this, "Update Dialogue FullImage");
+                fullImage = newFullImage;
                 EditorUtility.SetDirty(this);
             }
         }
@@ -88,6 +141,13 @@ namespace RPG.Dialogue
         {
             Undo.RecordObject(this, "Changed Dialogue Node Speaker");
             isPlayerSpeaking = newIsPlayerSpeaking;
+            EditorUtility.SetDirty(this);
+        }
+
+        public void SetIsFullImage(bool newIsFullImage)
+        {
+            Undo.RecordObject(this, "Changed Dialogue Node FullImage");
+            isFullImage = newIsFullImage;
             EditorUtility.SetDirty(this);
         }
 

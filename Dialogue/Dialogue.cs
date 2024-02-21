@@ -46,6 +46,7 @@ namespace RPG.Dialogue
                 }
             }
         }
+
         public IEnumerable<DialogueNode> GetPlayerChildren(DialogueNode currentNode)//IsPlayerSpeakingに設定されたノードだけを選別、取得する
         {
             foreach (DialogueNode node in GetAllChildren(currentNode))
@@ -56,7 +57,6 @@ namespace RPG.Dialogue
                 }
             }
         }
-
 
         public IEnumerable<DialogueNode> GetAIChildren(DialogueNode currentNode)//IsPlayerSpeakingに設定されていないノードだけを選別、取得する
         {
@@ -69,6 +69,16 @@ namespace RPG.Dialogue
             }
         }
 
+        public IEnumerable<DialogueNode> GetFullImageChildren(DialogueNode currentNode)
+        {
+            foreach (DialogueNode node in GetAllChildren(currentNode))
+            {
+                if (node.IsFullImage())
+                {
+                    yield return node;
+                }
+            }
+        }
 
 #if UNITY_EDITOR
         public void CreateNode(DialogueNode parent)
@@ -83,10 +93,10 @@ namespace RPG.Dialogue
             }
             Undo.RegisterCreatedObjectUndo(newNode, "Created Dialogue Node");
 
-    if(AssetDatabase.GetAssetPath(this)!="")  // Only Undo if this Dialogue has been committed by setting it's name
-    {
-        Undo.RecordObject(this, "Added Dialogue Node");
-    }
+            if (AssetDatabase.GetAssetPath(this) != "")  // ダイアログの名前が設定されている場合のみアンドゥ
+            {
+                Undo.RecordObject(this, "Added Dialogue Node");
+            }
 
             nodes.Add(newNode);
             OnValidate();
@@ -113,8 +123,6 @@ namespace RPG.Dialogue
         public void OnBeforeSerialize()
         {
 #if UNITY_EDITOR
-
-
             if (AssetDatabase.GetAssetPath(this) != "")
             {
                 foreach (DialogueNode node in GetAllNodes())

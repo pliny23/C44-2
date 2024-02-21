@@ -6,7 +6,7 @@ using UnityEditor.Callbacks;
 using UnityEngine;
 using System.Linq;
 
-namespace RPG.Dialogue.Editor
+namespace RPG.Dialogue.Editor//変更前
 {
     public class DialogueEditor : EditorWindow
     {
@@ -15,6 +15,8 @@ namespace RPG.Dialogue.Editor
         GUIStyle nodeStyle;
         [NonSerialized]
         GUIStyle playerNodeStyle;
+        [NonSerialized]
+        GUIStyle FullNodeStyle;
         [NonSerialized]
         DialogueNode draggingNode = null;
         [NonSerialized]
@@ -59,14 +61,20 @@ namespace RPG.Dialogue.Editor
             nodeStyle = new GUIStyle();
             nodeStyle.normal.background = EditorGUIUtility.Load("node0") as Texture2D;
             nodeStyle.normal.textColor = Color.white;
-            nodeStyle.padding = new RectOffset(20, 20, 20, 20);
+            nodeStyle.padding = new RectOffset(10, 10, 10, 10);
             nodeStyle.border = new RectOffset(12, 12, 12, 12);
 
             playerNodeStyle = new GUIStyle();
-            playerNodeStyle.normal.background = EditorGUIUtility.Load("node1") as Texture2D;
+            playerNodeStyle.normal.background = EditorGUIUtility.Load("node1") as Texture2D;//背景テクスチャ
             playerNodeStyle.normal.textColor = Color.white;
-            playerNodeStyle.padding = new RectOffset(20, 20, 20, 20);
+            playerNodeStyle.padding = new RectOffset(10, 10, 10, 10);
             playerNodeStyle.border = new RectOffset(12, 12, 12, 12);
+
+            FullNodeStyle = new GUIStyle();
+            FullNodeStyle.normal.background = EditorGUIUtility.Load("node5") as Texture2D;//背景テクスチャ
+            FullNodeStyle.normal.textColor = Color.white;
+            FullNodeStyle.padding = new RectOffset(10, 10, 10, 10); // パディングを設定
+            FullNodeStyle.border = new RectOffset(12, 12, 12, 12); // ボーダーを設定
         }
 
         private void OnSelectionChanged()
@@ -167,62 +175,78 @@ namespace RPG.Dialogue.Editor
 
         private void DrawNode(DialogueNode node)
         {
-            GUIStyle style = nodeStyle;
-            if (node.IsPlayerSpeaking())
-            {
-                style = playerNodeStyle;
-            }
-            GUILayout.BeginArea(node.GetRect(), style);
+            GUIStyle style = node.IsPlayerSpeaking() ? playerNodeStyle : (node.IsFullImage() ? FullNodeStyle : nodeStyle); // プレイヤーが話しているかどうかでスタイルを選択
+
+            GUILayout.BeginArea(node.GetRect(), style);//----------------------------------------GUILayout.BeginArea
             EditorGUI.BeginChangeCheck();
 
-            node.SetImage(EditorGUILayout.ObjectField("", node.GetImage(), typeof(Sprite), false, GUILayout.Width(50), GUILayout.Height(50)) as Sprite);//画像を指定
+            if (node.IsFullImage())//一枚絵ノードの時
+            {
+                // フルイメージを取得し、新しいスプライトを選択する
+                node.SetFullImage(EditorGUILayout.ObjectField("", node.GetFullImage(), typeof(Sprite), false, GUILayout.Width(65), GUILayout.Height(65)) as Sprite);
+                node.SetText(EditorGUILayout.TextArea(node.GetText(), GUILayout.Height(40)));//テキスト２行
 
-            node.SetText(EditorGUILayout.TextField(node.GetText()));
+            }
+            else if (!node.IsPlayerSpeaking() && !node.IsFullImage())//ノーマルノードの時
+            {
+                GUILayout.BeginHorizontal();
+                node.SetImageL(EditorGUILayout.ObjectField("", node.GetImageL(), typeof(Sprite), false, GUILayout.Width(50), GUILayout.Height(50)) as Sprite);
+                node.SetImageR(EditorGUILayout.ObjectField("", node.GetImageR(), typeof(Sprite), false, GUILayout.Width(50), GUILayout.Height(50)) as Sprite);
+                GUILayout.EndHorizontal();
+                node.SetText(EditorGUILayout.TextArea(node.GetText(), GUILayout.Height(40)));//テキスト２行
 
+            }
+            else
+            {
+                // 選択肢のテキストは１行
+                node.SetText(EditorGUILayout.TextField(node.GetText()));
+            }
+
+            int buttonSizeW = 40; // ボタンのサイズを変数で指定
+            int buttonSizeH = 20; // ボタンのサイズを変数で指定
             GUILayout.BeginHorizontal();
-
-            if (GUILayout.Button("x"))
+            if (GUILayout.Button("x", GUILayout.Width(buttonSizeW), GUILayout.Height(buttonSizeH))) // ボタンのサイズを半分に設定
             {
                 deletingNode = node;
             }
             DrawLinkButtons(node);
-            if (GUILayout.Button("+"))
+            if (GUILayout.Button("+", GUILayout.Width(buttonSizeW), GUILayout.Height(buttonSizeH))) // ボタンのサイズを半分に設定
             {
                 creatingNode = node;
             }
-
             GUILayout.EndHorizontal();
-
-            GUILayout.EndArea();
+            GUILayout.EndArea();//-----------------------------------------------------------------GUILayout.EndArea
         }
 
         private void DrawLinkButtons(DialogueNode node)
         {
+            int buttonSizeH = 20; // ボタンのサイズを変数で指定
+            int buttonSizeW = 40;
             if (linkingParentNode == null)
             {
-                if (GUILayout.Button("link"))
+                if (GUILayout.Button("link", GUILayout.Width(buttonSizeW), GUILayout.Height(buttonSizeH))) // ボタンのサイズを半分に設定
                 {
                     linkingParentNode = node;
                 }
             }
             else if (linkingParentNode == node)
             {
-                if (GUILayout.Button("cancel"))
+                if (GUILayout.Button("cancel", GUILayout.Width(buttonSizeW), GUILayout.Height(buttonSizeH))) // ボタンのサイズを半分に設定
                 {
                     linkingParentNode = null;
                 }
             }
             else if (linkingParentNode.GetChildren().Contains(node.name))
             {
-                if (GUILayout.Button("unlink"))
-                {
+                if (GUILayout.Button("unlink", GUILayout.Width(buttonSizeW), GUILayout.Height(buttonSizeH)))
+                { // ボタンのサイズを半分に設定
                     linkingParentNode.RemoveChild(node.name);
                     linkingParentNode = null;
                 }
             }
             else
             {
-                if (GUILayout.Button("child"))
+                if (GUILayout.Button("child", GUILayout.Width(buttonSizeW), GUILayout.Height(buttonSizeH))) // ボタンのサイズを半分に設定
                 {
                     Undo.RecordObject(selectedDialogue, "Add Dialogue Link");
                     linkingParentNode.AddChild(node.name);
@@ -260,5 +284,8 @@ namespace RPG.Dialogue.Editor
             }
             return foundNode;
         }
+
+
+
     }
 }

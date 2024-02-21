@@ -14,6 +14,7 @@ namespace RPG.Dialogue
         DialogueNode currentNode = null;
         AIConversant currentConversant = null;
         bool isChoosing = false;
+        bool isFull = false;
 
         public event Action onConversationUpdated;
 
@@ -32,6 +33,7 @@ namespace RPG.Dialogue
             TriggerExitAction();
             currentNode = null;
             isChoosing = false;
+            isFull = false;
             currentConversant = null;
             onConversationUpdated();
         }
@@ -45,6 +47,11 @@ namespace RPG.Dialogue
         {
             return isChoosing;
         }
+        public bool IsFull()
+        {
+            return isFull;
+            //currentDialogue != null;
+        }
         public string GetText()
         {
             if (currentNode == null)
@@ -54,10 +61,20 @@ namespace RPG.Dialogue
             return currentNode.GetText();
         }
 
-        public Sprite GetImage()
+        public Sprite GetImageL()
         {
 
-            return currentNode.GetImage();
+            return currentNode.GetImageL();
+        }
+        public Sprite GetImageR()
+        {
+
+            return currentNode.GetImageR();
+        }
+        public Sprite GetFullImage()
+        {
+
+            return currentNode.GetFullImage();
         }
 
         public IEnumerable<DialogueNode> GetChoices()//プレイヤーが選択できる選択肢を取得
@@ -85,6 +102,18 @@ namespace RPG.Dialogue
                 onConversationUpdated();
                 return;
             }
+            // 現在のノードがフルイメージのレスポンスを持っているかどうかを確認
+            int numFullImageResponses = currentDialogue.GetFullImageChildren(currentNode).Count();
+            if (numFullImageResponses > 0)
+            {
+                isFull = true;
+            }
+            else
+            {
+
+                isFull = false;
+            }
+
 
             // プレイヤーのレスポンスがない場合、AIのレスポンスからランダムに次のノードを選択する
             DialogueNode[] children = currentDialogue.GetAIChildren(currentNode).ToArray();
