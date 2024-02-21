@@ -185,38 +185,26 @@ namespace RPG.Dialogue.Editor
                 EditorGUILayout.BeginHorizontal();
                 node.SetFullImage(EditorGUILayout.ObjectField("", node.GetFullImage(), typeof(Sprite), false, GUILayout.Width(65), GUILayout.Height(65)) as Sprite);
 
-                GUILayout.Space(10);
+                GUILayout.Space(5);
                 EditorGUILayout.BeginVertical();
                 EditorGUILayout.BeginHorizontal();
 
-                GUIStyle blackTextStyle = new GUIStyle(EditorStyles.label);
-                GUIStyle boldTextStyle = new GUIStyle(blackTextStyle);
-                boldTextStyle.normal.textColor = Color.black;
+                // GUIStyle blackTextStyle = new GUIStyle(EditorStyles.label);
+                // GUIStyle boldTextStyle = new GUIStyle(blackTextStyle);
+                // boldTextStyle.normal.textColor = Color.black;
+
                 //boldTextStyle.fontStyle = FontStyle.Bold;
 
                 //node.SetWinL(EditorGUILayout.ToggleLeft("左", node.GetWinL(), blackTextStyle, GUILayout.Width(35)));//チェックボックス
 
-                node.SetWinL(GUILayout.Toggle(node.GetWinL(), "L", boldTextStyle, GUILayout.Width(15)));//チェックボックスなし
-                if (node.GetWinL())
-                {
-                    node.SetWinR(false);
-                    node.SetWinN(false);
-                }
+                GUIStyle blackTextStyle = new GUIStyle(EditorStyles.label);
+                blackTextStyle.fontSize = 25; // フォントサイズを設定します
+                GUIStyle boldTextStyle = new GUIStyle(blackTextStyle);
+                boldTextStyle.normal.textColor = Color.black;
+                boldTextStyle.fontStyle = FontStyle.Bold;
 
-                node.SetWinR(GUILayout.Toggle(node.GetWinR(), "R", boldTextStyle, GUILayout.Width(15)));
-                if (node.GetWinR())
-                {
-                    node.SetWinL(false);
-                    node.SetWinN(false);
-                }
-
-                node.SetWinN(GUILayout.Toggle(node.GetWinN(), "N", boldTextStyle));
-                if (node.GetWinN())
-                {
-                    node.SetWinL(false);
-                    node.SetWinR(false);
-                }
-
+                node.SetWinL(GUILayout.Toggle(node.GetWinL(), "☚", boldTextStyle, GUILayout.Width(22)));//チェックボックスなし
+                node.SetWinR(GUILayout.Toggle(node.GetWinR(), "☛", boldTextStyle));
 
                 EditorGUILayout.EndHorizontal();
                 EditorGUILayout.EndVertical();

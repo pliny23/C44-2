@@ -18,8 +18,6 @@ namespace RPG.Dialogue
         [SerializeField]
         bool winR;//吹き出し
         [SerializeField]
-        bool winN;//吹き出し
-        [SerializeField]
         Sprite imageL;
         [SerializeField]
         Sprite imageR;
@@ -62,10 +60,7 @@ namespace RPG.Dialogue
         {
             return winR;
         }
-        public bool GetWinN()//---------------吹き出し
-        {
-            return winN;
-        }
+
 
         public Sprite GetImageL()
         {
@@ -174,16 +169,6 @@ namespace RPG.Dialogue
                 EditorUtility.SetDirty(this);
             }
         }
-                public void SetWinN(bool newWinN)//------------------------------チェックボックス
-        {
-            if (newWinN != winN)
-            {
-                Undo.RecordObject(this, "Update Dialogue WinN");
-                winN = newWinN;
-                EditorUtility.SetDirty(this);
-            }
-        }
-
 
         public void SetPlayerIsSpeaking(bool newIsPlayerSpeaking)
         {
