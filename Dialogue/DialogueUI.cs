@@ -11,8 +11,8 @@ namespace RPG.UI
     {
         PlayerConversant playerConversant;
         [SerializeField] TextMeshProUGUI AIText;
-        [SerializeField] Image AIImageL;
-        [SerializeField] Image AIImageR;
+        [SerializeField] GameObject AIImageL;
+        [SerializeField] GameObject AIImageR;
         [SerializeField] GameObject AIFullImage;
         [SerializeField] Image AIFull;
         [SerializeField] Button nextButton;
@@ -20,9 +20,9 @@ namespace RPG.UI
         [SerializeField] Transform choiceRoot;//選択肢ボタンを入れる矩形
         [SerializeField] GameObject choicePrefab;
         [SerializeField] Button quitButton;
-        [SerializeField] GameObject Mwindow;
-        [SerializeField] Image WindowL;
-        [SerializeField] Image WindowR;
+        [SerializeField] GameObject WindowL;//ウィンドウ
+        [SerializeField] GameObject WindowR;
+        [SerializeField] GameObject WindowN;
 
         void Start()
         {
@@ -41,7 +41,6 @@ namespace RPG.UI
                 return;//処理をスキップして終了
             }
             AIResponse.SetActive(!playerConversant.IsChoosing());//AIが発言中ならAIResponseをアクティブに
-            Mwindow.SetActive(!playerConversant.IsChoosing());//吹き出し表示
             choiceRoot.gameObject.SetActive(playerConversant.IsChoosing());//選択中ならchoiceRootをアクティブに
             if (playerConversant.IsChoosing())
             {
@@ -52,24 +51,25 @@ namespace RPG.UI
                 AIText.text = playerConversant.GetText();
                 AIFullImage.SetActive(playerConversant.IsFull());//一枚絵ノードがtrueならUIをアクティブに
 
+                WindowL.gameObject.SetActive(playerConversant.GetWinL());//ウィンドウ表示
+                WindowR.gameObject.SetActive(playerConversant.GetWinR());//ウィンドウ表示
+                WindowN.gameObject.SetActive(!playerConversant.GetWinL() && !playerConversant.GetWinR());//ウィンドウ表示
+
                 if (playerConversant.GetImageL() != null)//顔画像左
                 {
-                    AIImageL.gameObject.SetActive(!AIImageL.gameObject.activeSelf);//表示されてないなら表示する
-                    AIImageL.sprite = playerConversant.GetImageL(); //画像の更新
+                    //AIImageL.SetActive(!AIImageL.activeSelf);//非表示の場合は表示する
+                    AIImageL.GetComponent<Image>().sprite = playerConversant.GetImageL(); //画像を更新する
                 }
                 if (playerConversant.GetImageR() != null)//顔画像右
                 {
-                    AIImageR.gameObject.SetActive(!AIImageR.gameObject.activeSelf);
-                    AIImageR.sprite = playerConversant.GetImageR();
+                    //AIImageR.SetActive(!AIImageR.activeSelf);
+                    AIImageR.GetComponent<Image>().sprite = playerConversant.GetImageR();
                 }
-                if (playerConversant.GetFullImage() != null)
+                if (playerConversant.GetFullImage() != null)//新規画像が入っているなら更新
                 {
                     AIFull.sprite = playerConversant.GetFullImage();
                 }
                 nextButton.gameObject.SetActive(playerConversant.HasNext());
-
-                //吹き出し右なら右
-                //左なら左を表示
             }
         }
 

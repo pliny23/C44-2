@@ -1,5 +1,34 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6193184411414114490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
+  m_Name: 7f4563a3-3740-4800-a802-60bee513cccf
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  isFullImage: 0
+  text: "\u53F3\u3092\u6D88\u3059"
+  winL: 0
+  winR: 1
+  imageL: {fileID: 0}
+  imageR: {fileID: 21300000, guid: 20b2c34646c45704d992bb9722c2b3b2, type: 3}
+  fullImage: {fileID: 0}
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 1566
+    y: 34
+    width: 220
+    height: 135
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &-3623012938927506919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17,8 +46,7 @@ MonoBehaviour:
   text: "\u3053\u3093\u306B\u3061\u306F"
   winL: 1
   winR: 0
-  winN: 0
-  imageL: {fileID: 21300000, guid: 6c1f8fe6b8c3d5543a4d2fdd3f4499c9, type: 3}
+  imageL: {fileID: 21300000, guid: d1996b413039314498f5e5f09972de40, type: 3}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
   children:
@@ -26,8 +54,8 @@ MonoBehaviour:
   - cd915a20-42dd-4450-aaf5-56098adc912b
   rect:
     serializedVersion: 2
-    x: 74
-    y: 131
+    x: 71
+    y: 135
     width: 200
     height: 135
   onEnterAction: 
@@ -49,7 +77,6 @@ MonoBehaviour:
   text: "\u30AC\u30FC\u30F3"
   winL: 0
   winR: 0
-  winN: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
@@ -79,7 +106,6 @@ MonoBehaviour:
   text: "\u8E0A\u308B"
   winL: 0
   winR: 0
-  winN: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
@@ -115,6 +141,8 @@ MonoBehaviour:
   - {fileID: 5102182173426810176}
   - {fileID: 8846592762425439444}
   - {fileID: 4016999225117973715}
+  - {fileID: 5139806227791213979}
+  - {fileID: -6193184411414114490}
 --- !u!114 &1119968374338072480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,9 +158,8 @@ MonoBehaviour:
   isPlayerSpeaking: 0
   isFullImage: 0
   text: "\u5909\u306A\u4EBA\uFF01"
-  winL: 0
+  winL: 1
   winR: 0
-  winN: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
@@ -140,7 +167,7 @@ MonoBehaviour:
   - e2380b9a-03be-4642-a72b-61f505f79222
   rect:
     serializedVersion: 2
-    x: 578
+    x: 580
     y: 198
     width: 200
     height: 135
@@ -163,7 +190,6 @@ MonoBehaviour:
   text: "\u6751\u4EBA\u306F\u53BB\u3063\u3066\u884C\u3063\u305F\u3002"
   winL: 0
   winR: 0
-  winN: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
@@ -194,7 +220,6 @@ MonoBehaviour:
   text: "\u3084\u3041\u3002\u3044\u3044\u5929\u6C17\u3060\u306D"
   winL: 0
   winR: 0
-  winN: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
@@ -225,16 +250,46 @@ MonoBehaviour:
   text: "\u9078\u629E\u80A2\uFF11\u30E9\u30B9\u30C8"
   winL: 0
   winR: 0
-  winN: 0
   imageL: {fileID: 0}
-  imageR: {fileID: 0}
+  imageR: {fileID: 21300000, guid: 6c1f8fe6b8c3d5543a4d2fdd3f4499c9, type: 3}
   fullImage: {fileID: 0}
-  children: []
+  children:
+  - 5210706f-bc23-4d2f-9df9-93d636a01437
   rect:
     serializedVersion: 2
     x: 1072
     y: 39
     width: 200
+    height: 135
+  onEnterAction: 
+  onExitAction: 
+--- !u!114 &5139806227791213979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
+  m_Name: 5210706f-bc23-4d2f-9df9-93d636a01437
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  isFullImage: 0
+  text: "\u5DE6\u3092\u6D88\u3059"
+  winL: 1
+  winR: 0
+  imageL: {fileID: 21300000, guid: 20b2c34646c45704d992bb9722c2b3b2, type: 3}
+  imageR: {fileID: 0}
+  fullImage: {fileID: 0}
+  children:
+  - 7f4563a3-3740-4800-a802-60bee513cccf
+  rect:
+    serializedVersion: 2
+    x: 1316
+    y: 34
+    width: 220
     height: 135
   onEnterAction: 
   onExitAction: 
@@ -254,8 +309,7 @@ MonoBehaviour:
   isFullImage: 1
   text: "\u8A00\u308F\u308C\u3066\u307F\u308C\u3070\u305D\u3046\u3060\u3063\u305F\u3088\u3046\u306A\u6C17\u304C\u3059\u308B\u3002\n\u4FFA\u306F\u4E00\u4F53\u4F55\u3092\u898B\u3066\u3044\u305F\u3093\u3060\uFF1F"
   winL: 0
-  winR: 1
-  winN: 0
+  winR: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
@@ -263,8 +317,8 @@ MonoBehaviour:
   - 4bfaa699-bcd5-4add-98e4-cbad903241d8
   rect:
     serializedVersion: 2
-    x: 831
-    y: 49
+    x: 814
+    y: 24
     width: 220
     height: 130
   onEnterAction: 
@@ -284,9 +338,8 @@ MonoBehaviour:
   isPlayerSpeaking: 0
   isFullImage: 1
   text: "\u6628\u65E5\u304B\u3089\u305A\u3063\u3068\u96E8\u3060\u3088"
-  winL: 0
-  winR: 1
-  winN: 0
+  winL: 1
+  winR: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 21300000, guid: 6594975c9a0c6bb42a35333e7f2100e4, type: 3}
@@ -294,8 +347,8 @@ MonoBehaviour:
   - af793fa6-1c60-466d-a014-15d0c4ca6e4b
   rect:
     serializedVersion: 2
-    x: 564
-    y: 14
+    x: 560
+    y: 28
     width: 220
     height: 130
   onEnterAction: 

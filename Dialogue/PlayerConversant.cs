@@ -33,7 +33,8 @@ namespace RPG.Dialogue
             TriggerExitAction();
             currentNode = null;
             isChoosing = false;
-            isFull = false;
+            isFull = false;//フル画像を非表示
+            //顔画像false
             currentConversant = null;
             onConversationUpdated();
         }
@@ -50,7 +51,6 @@ namespace RPG.Dialogue
         public bool IsFull()
         {
             return isFull;
-            //currentDialogue != null;
         }
         public string GetText()
         {
@@ -75,6 +75,16 @@ namespace RPG.Dialogue
         {
 
             return currentNode.GetFullImage();
+        }
+        public bool GetWinR()
+        {
+
+            return currentNode.GetWinR();
+        }
+        public bool GetWinL()
+        {
+
+            return currentNode.GetWinL();
         }
 
         public IEnumerable<DialogueNode> GetChoices()//プレイヤーが選択できる選択肢を取得

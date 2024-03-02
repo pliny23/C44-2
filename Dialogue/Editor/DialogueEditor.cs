@@ -186,28 +186,30 @@ namespace RPG.Dialogue.Editor
                 node.SetFullImage(EditorGUILayout.ObjectField("", node.GetFullImage(), typeof(Sprite), false, GUILayout.Width(65), GUILayout.Height(65)) as Sprite);
 
                 GUILayout.Space(5);
-                EditorGUILayout.BeginVertical();
-                EditorGUILayout.BeginHorizontal();
-
-                // GUIStyle blackTextStyle = new GUIStyle(EditorStyles.label);
-                // GUIStyle boldTextStyle = new GUIStyle(blackTextStyle);
-                // boldTextStyle.normal.textColor = Color.black;
-
-                //boldTextStyle.fontStyle = FontStyle.Bold;
-
-                //node.SetWinL(EditorGUILayout.ToggleLeft("左", node.GetWinL(), blackTextStyle, GUILayout.Width(35)));//チェックボックス
-
                 GUIStyle blackTextStyle = new GUIStyle(EditorStyles.label);
-                blackTextStyle.fontSize = 25; // フォントサイズを設定します
+                blackTextStyle.fontSize = 32; // フォントサイズを設定します
                 GUIStyle boldTextStyle = new GUIStyle(blackTextStyle);
                 boldTextStyle.normal.textColor = Color.black;
                 boldTextStyle.fontStyle = FontStyle.Bold;
 
-                node.SetWinL(GUILayout.Toggle(node.GetWinL(), "☚", boldTextStyle, GUILayout.Width(22)));//チェックボックスなし
-                node.SetWinR(GUILayout.Toggle(node.GetWinR(), "☛", boldTextStyle));
-
-                EditorGUILayout.EndHorizontal();
-                EditorGUILayout.EndVertical();
+                if (GUILayout.Toggle(node.GetWinL(), "L", boldTextStyle, GUILayout.Width(27)))
+                {
+                    node.SetWinL(true);
+                    node.SetWinR(false);
+                }
+                else
+                {
+                    node.SetWinL(false);
+                }
+                if (GUILayout.Toggle(node.GetWinR(), "R", boldTextStyle))
+                {
+                    node.SetWinR(true);
+                    node.SetWinL(false);
+                }
+                else
+                {
+                    node.SetWinR(false);
+                }
                 EditorGUILayout.EndHorizontal();
 
                 node.SetText(EditorGUILayout.TextArea(node.GetText(), GUILayout.Height(40)));//テキスト２行
@@ -217,6 +219,33 @@ namespace RPG.Dialogue.Editor
                 GUILayout.BeginHorizontal();
                 node.SetImageL(EditorGUILayout.ObjectField("", node.GetImageL(), typeof(Sprite), false, GUILayout.Width(50), GUILayout.Height(50)) as Sprite);
                 node.SetImageR(EditorGUILayout.ObjectField("", node.GetImageR(), typeof(Sprite), false, GUILayout.Width(50), GUILayout.Height(50)) as Sprite);
+
+                GUILayout.Space(5);
+                GUIStyle blackTextStyle = new GUIStyle(EditorStyles.label);
+                blackTextStyle.fontSize = 32; // フォントサイズを設定します
+                GUIStyle boldTextStyle = new GUIStyle(blackTextStyle);
+                boldTextStyle.normal.textColor = Color.black;
+                boldTextStyle.fontStyle = FontStyle.Bold;
+
+                if (GUILayout.Toggle(node.GetWinL(), "L", boldTextStyle, GUILayout.Width(27)))
+                {
+                    node.SetWinL(true);
+                    node.SetWinR(false);
+                }
+                else
+                {
+                    node.SetWinL(false);
+                }
+                if (GUILayout.Toggle(node.GetWinR(), "R", boldTextStyle))
+                {
+                    node.SetWinR(true);
+                    node.SetWinL(false);
+                }
+                else
+                {
+                    node.SetWinR(false);
+                }
+
                 GUILayout.EndHorizontal();
                 node.SetText(EditorGUILayout.TextArea(node.GetText(), GUILayout.Height(40)));//テキスト２行
             }
