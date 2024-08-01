@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8735148076833068489
+--- !u!114 &-4623733990069966866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,27 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
-  m_Name: 25c933e9-4b21-4952-a011-7d7a2b5b6de2
+  m_Name: 8ae889e2-8c53-44f3-a076-01197367eff7
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
   isFullImage: 0
-  text: "\u3046\u308C\u3057\u3044\uFF1F"
+  text: "\u3093\uFF1F\u79C1\u306B\u4F55\u304B\u7528\u304B\u306A\uFF1F"
   winL: 0
-  winR: 0
+  winR: 1
   imageL: {fileID: 0}
-  imageR: {fileID: 0}
+  imageR: {fileID: 21300000, guid: 045e81fd4b1f9484789a4dabd96f35b0, type: 3}
   fullImage: {fileID: 0}
   children:
-  - b8594082-e0c6-4a6d-8745-dc0f3f372c2c
+  - 9c176a5a-a0b4-46ee-88b3-64c8bd1dea8e
+  - bc60172f-a432-4999-aa82-d2dd0d215ad4
   rect:
     serializedVersion: 2
-    x: 1414
-    y: 84
-    width: 200
-    height: 130
+    x: 3
+    y: -4
+    width: 220
+    height: 135
   onEnterAction: 
   onExitAction: 
---- !u!114 &-7459086572740128040
+--- !u!114 &-4113193968931932740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,27 +41,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
-  m_Name: b700b029-d4ba-45bb-99c5-73ef970223da
+  m_Name: 337804f4-e916-4894-a632-83495d6a4889
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
   isFullImage: 0
-  text: "\u3078\u30FC\u3069\u3046\u3067\u3082\u3044\u3044"
-  winL: 1
-  winR: 0
-  imageL: {fileID: 21300000, guid: 4953f90e42164114b959473b65580505, type: 3}
-  imageR: {fileID: 0}
+  text: "\u305D\u308C\u306A\u3089\u3001\u795E\u6BBF\u3067\u8A71\u3092\u805E\u3053\u3046\u3002\n\u571F\u66DC\u65E5\u306B\u795E\u6BBF\u306B\u6765\u306A\u3055\u3044\u3002"
+  winL: 0
+  winR: 1
+  imageL: {fileID: 0}
+  imageR: {fileID: 21300000, guid: faf0d1361c86abe4094ea5a07379a6b5, type: 3}
   fullImage: {fileID: 0}
   children:
-  - 7ffbbe23-6a66-401d-bc4d-a0be1e86bf35
+  - 90532f28-ceac-4070-b7f3-c644c1c46297
   rect:
     serializedVersion: 2
-    x: 905
-    y: 86
-    width: 200
-    height: 130
-  onEnterAction: 
+    x: 531
+    y: -4
+    width: 220
+    height: 135
+  onEnterAction: LikeUP
   onExitAction: 
---- !u!114 &-6257387569305607231
+--- !u!114 &-2268670322398404896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,27 +71,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
-  m_Name: 7ffbbe23-6a66-401d-bc4d-a0be1e86bf35
+  m_Name: 0e96f34e-6d7b-4b50-89e2-927c0b72e57d
   m_EditorClassIdentifier: 
-  isPlayerSpeaking: 1
+  isPlayerSpeaking: 0
   isFullImage: 0
-  text: "\u305D\u3093\u306A\u30FB\u30FB\u30FB"
+  text: "\u305D\u308C\u306A\u3089\u3044\u3044\u304C\u3002\n\u3053\u306E\u8FBA\u308A\u306F\u7269\u9A12\u3060\u304B\u3089\u65E9\u304F\u5E30\u308A\u306A\u3055\u3044\u3002"
   winL: 0
-  winR: 0
+  winR: 1
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
-  children:
-  - 25c933e9-4b21-4952-a011-7d7a2b5b6de2
+  children: []
   rect:
     serializedVersion: 2
-    x: 1164
-    y: 82
-    width: 200
-    height: 130
+    x: 545
+    y: 136
+    width: 220
+    height: 135
   onEnterAction: 
   onExitAction: 
---- !u!114 &-5754177216195333573
+--- !u!114 &-2070744541657212467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,27 +100,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
-  m_Name: 3d5c1bef-0ae3-44ca-a63a-e1971a703d02
+  m_Name: 9c176a5a-a0b4-46ee-88b3-64c8bd1dea8e
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 1
   isFullImage: 0
-  text: "\u3084\u3041\u3044\u3044\u5929\u6C17\u3060\u306D"
+  text: "\u306F\u3044"
   winL: 0
   winR: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
   children:
-  - d3570d6e-3786-4175-8a25-c120dfac2607
+  - 337804f4-e916-4894-a632-83495d6a4889
   rect:
     serializedVersion: 2
-    x: 409
-    y: 80
-    width: 200
-    height: 130
+    x: 241
+    y: 45
+    width: 220
+    height: 135
   onEnterAction: 
   onExitAction: 
---- !u!114 &-1400664154479579486
+--- !u!114 &-1952216920636733184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,24 +130,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
-  m_Name: aad4cb13-6888-4d31-9c52-bc57b552379e
+  m_Name: 90532f28-ceac-4070-b7f3-c644c1c46297
   m_EditorClassIdentifier: 
-  isPlayerSpeaking: 1
+  isPlayerSpeaking: 0
   isFullImage: 0
-  text: "\u3053\u3093\u306B\u3061\u306F\uFF01"
+  text: "\u30FC\u795E\u5B98\u306E\u597D\u611F\u5EA6\u304C\uFF11\u4E0A\u304C\u3063\u305F\uFF01\uFF0D"
   winL: 0
   winR: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
   fullImage: {fileID: 0}
-  children:
-  - 3d5c1bef-0ae3-44ca-a63a-e1971a703d02
+  children: []
   rect:
     serializedVersion: 2
-    x: 155
-    y: 88
-    width: 200
-    height: 130
+    x: 781
+    y: -4
+    width: 220
+    height: 135
   onEnterAction: 
   onExitAction: 
 --- !u!114 &11400000
@@ -160,17 +159,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96d9e36dc44519f4ab097a31d09aabb1, type: 3}
-  m_Name: D2
+  m_Name: Talk_Town_man
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: -1400664154479579486}
-  - {fileID: -5754177216195333573}
-  - {fileID: 3972724012390559288}
-  - {fileID: -7459086572740128040}
-  - {fileID: -6257387569305607231}
-  - {fileID: -8735148076833068489}
-  - {fileID: 5759664420213062971}
---- !u!114 &3972724012390559288
+  - {fileID: -4623733990069966866}
+  - {fileID: -2070744541657212467}
+  - {fileID: 6390255273230114255}
+  - {fileID: -4113193968931932740}
+  - {fileID: -2268670322398404896}
+  - {fileID: -1952216920636733184}
+--- !u!114 &6390255273230114255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,51 +178,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
-  m_Name: d3570d6e-3786-4175-8a25-c120dfac2607
+  m_Name: bc60172f-a432-4999-aa82-d2dd0d215ad4
   m_EditorClassIdentifier: 
-  isPlayerSpeaking: 0
+  isPlayerSpeaking: 1
   isFullImage: 0
-  text: "\u6628\u65E5\u306F\u96E8\u3060\u3063\u305F\u3088"
-  winL: 0
-  winR: 1
-  imageL: {fileID: 0}
-  imageR: {fileID: 21300000, guid: 045e81fd4b1f9484789a4dabd96f35b0, type: 3}
-  fullImage: {fileID: 0}
-  children:
-  - b700b029-d4ba-45bb-99c5-73ef970223da
-  rect:
-    serializedVersion: 2
-    x: 649
-    y: 82
-    width: 200
-    height: 130
-  onEnterAction: 
-  onExitAction: 
---- !u!114 &5759664420213062971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
-  m_Name: b8594082-e0c6-4a6d-8745-dc0f3f372c2c
-  m_EditorClassIdentifier: 
-  isPlayerSpeaking: 0
-  isFullImage: 1
-  text: "\u300C\u307E\u3066\u30FC\uFF01\u300D\n\u7A81\u7136\u732B\u304C\u8E0A\u308A\u3060\u3057\u3066\u304D\u305F\uFF01\uFF01"
+  text: "\u3044\u3044\u3048"
   winL: 0
   winR: 0
   imageL: {fileID: 0}
   imageR: {fileID: 0}
-  fullImage: {fileID: 21300000, guid: 882c0160be2934443a44baa6493d06cf, type: 3}
-  children: []
+  fullImage: {fileID: 0}
+  children:
+  - 0e96f34e-6d7b-4b50-89e2-927c0b72e57d
   rect:
     serializedVersion: 2
-    x: 1689
-    y: 67
+    x: 239
+    y: 131
     width: 220
     height: 135
   onEnterAction: 

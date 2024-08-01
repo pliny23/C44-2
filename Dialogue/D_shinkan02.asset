@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d9e36dc44519f4ab097a31d09aabb1, type: 3}
+  m_Name: D_shinkan02
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 2571550621222426788}
+--- !u!114 &2571550621222426788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a07772b5324764c8b844eab28ac461, type: 3}
+  m_Name: 264bfb7e-0c40-4586-8a73-feaabcb3cfbd
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  isFullImage: 0
+  text: "\u308A\u3093\u3054\u3092\u4E00\u3064\u3082\u3063\u3066\u3044\u308B\u306D"
+  winL: 0
+  winR: 1
+  imageL: {fileID: 0}
+  imageR: {fileID: 21300000, guid: 045e81fd4b1f9484789a4dabd96f35b0, type: 3}
+  fullImage: {fileID: 0}
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 220
+    height: 135
+  onEnterAction: 
+  onExitAction: 

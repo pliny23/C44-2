@@ -26,7 +26,7 @@ namespace RPG.UI
 
         void Start()
         {
-            playerConversant = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>();
+            playerConversant = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerConversant>();
             playerConversant.onConversationUpdated += UpdateUI;//ActionデリゲートにUpdateUIを登録
             nextButton.onClick.AddListener(() => playerConversant.Next());//nextButtonクリックでplayerConversant.Next()を呼び出す
             quitButton.onClick.AddListener(() => playerConversant.Quit());
@@ -75,6 +75,12 @@ namespace RPG.UI
 
         private void BuildChoiceList()//選択肢のリスト構築
         {
+            // choiceRootの全ての子要素を削除
+            foreach (Transform child in choiceRoot)
+            {
+                Destroy(child.gameObject);
+            }
+
             choiceRoot.DetachChildren();
             foreach (DialogueNode choice in playerConversant.GetChoices())
             {

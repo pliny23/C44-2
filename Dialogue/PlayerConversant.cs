@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using RPG.Core;
 
 namespace RPG.Dialogue
 {
@@ -15,19 +16,32 @@ namespace RPG.Dialogue
         AIConversant currentConversant = null;
         bool isChoosing = false;
         bool isFull = false;
-
+        private ModeMonitor modeMonitor;
         public event Action onConversationUpdated;
+
+
+        void Start()
+        {
+            modeMonitor = GetComponent<ModeMonitor>(); //初期化
+        }
+
 
         public void StartDialogue(AIConversant newConversant, Dialogue newDialogue)
         {
-            currentConversant = newConversant;
-            currentDialogue = newDialogue;
+            if (!modeMonitor.isTalking)
+            {
+                currentConversant = newConversant;
+                currentDialogue = newDialogue;
 
-            currentNode = currentDialogue.GetRootNode();
-            TriggerEnterAction();
-            onConversationUpdated();
+                currentNode = currentDialogue.GetRootNode();
+                TriggerEnterAction();
+                onConversationUpdated();
+
+                modeMonitor = GetComponent<ModeMonitor>();
+            }
+
         }
-        public void Quit()
+        public void Quit()//会話の終了
         {
             currentDialogue = null;
             TriggerExitAction();
@@ -37,6 +51,7 @@ namespace RPG.Dialogue
             //顔画像false
             currentConversant = null;
             onConversationUpdated();
+            modeMonitor.StartCameraMovement();
         }
 
         public bool IsActive()
@@ -102,8 +117,7 @@ namespace RPG.Dialogue
 
         public void Next()
         {
-            // 現在のノードがプレイヤーのレスポンスを持っているかどうかを確認
-            int numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();
+            int numPlayerResponses = FilterOnCondition(currentDialogue.GetPlayerChildren(currentNode)).Count();
             if (numPlayerResponses > 0)
             {
                 // プレイヤーのレスポンスがある場合、選択モードに移行して会話更新イベントを呼び出す
@@ -136,9 +150,25 @@ namespace RPG.Dialogue
 
         public bool HasNext()
         {
-            // 現在のノードに子ノードがあるかどうかを確認する
-            return currentDialogue.GetAllChildren(currentNode).Count() > 0;
+            return FilterOnCondition(currentDialogue.GetAllChildren(currentNode)).Count() > 0;
         }
+
+        private IEnumerable<DialogueNode> FilterOnCondition(IEnumerable<DialogueNode> inputNode)
+        {
+            foreach (var node in inputNode)
+            {
+                if (node.CheckCondition(GetEvaluators()))
+                {
+                    yield return node;
+                }
+            }
+        }
+
+        private IEnumerable<IPredicateEvaluator> GetEvaluators()
+        {
+            return GetComponents<IPredicateEvaluator>();
+        }
+
         private void TriggerEnterAction()
         {
             if (currentNode != null)

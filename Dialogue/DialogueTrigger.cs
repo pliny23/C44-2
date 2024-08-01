@@ -10,11 +10,13 @@ namespace RPG.Dialogue
         [SerializeField] string action;
         [SerializeField] UnityEvent onTrigger;
 
+
         public void Trigger(string actionToTrigger)
         {
             if (actionToTrigger == action)
             {
                 onTrigger.Invoke();
+
             }
         }
     }

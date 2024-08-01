@@ -2,78 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//設定データ用クラス
+[System.Serializable]
+public class LineSettings
+{
+    public Material lineMaterial;
+    public Gradient lineColor;
+    [Range(0.1f, 0.5f)] public float lineWidth = 0.1f; //線幅 
+    [Range(0f, 1f)] public float lineTolerance = 0.1f; //許容値
+    [Range(0f, 180f)] public float cornerThreshold = 45f; //角と判定するしきい値
+}
+
 public class StrokeController : MonoBehaviour
 {
-    [SerializeField] Material lineMaterial;
-    [SerializeField] Color lineColor;
-    [Range(0.1f, 0.5f)]
-    [SerializeField] float lineWidth;
+    [SerializeField] LineSettings lineSettings; //描画するラインの設定
 
-
-    GameObject lineObj;//線となるゲームオブジェクト用変数
-    LineRenderer lineRenderer;//lineObjのlineRenderer用変数
-    List<Vector2> linePoints;//コライダーのための座標を保持するリスト型の変数
-
-    void Start()
-    {
-        //Listの初期化*
-        linePoints = new List<Vector2>();
-    }
-
+    LineController currentLine; //描画中のラインオブジェクト
+    List<LineController> lines = new(); //描画したラインオブジェクトのリスト
 
     void Update()
     {
         //左クリックされた時
         if (Input.GetMouseButtonDown(0))
         {
-            //線となるゲームオブジェクト作成
-            _addLineObject();
+            //描画開始
+            StartStroke();
         }
+
         //左クリックされ続けている時
         if (Input.GetMouseButton(0))
         {
-            //lineRendererの更新処理
-            _addPositionDataToLineRenderer();
+            //描画更新
+            UpdateStroke();
+        }
+
+        //左クリックが終わった時
+        if (Input.GetMouseButtonUp(0))
+        {
+            //描画終了
+            EndStroke();
         }
     }
 
-    //ゲームオブジェクト作成関数
-
-    void _addLineObject()
+    //描画開始
+    private void StartStroke()
     {
-        //ゲームオブジェクト作成
-        lineObj = new GameObject();
-        //名前をLineにする
-        lineObj.name = "Line";
-        //lineObjにLineRendererコンポーネントを追加
-        lineObj.AddComponent<LineRenderer>();
-        //lineObjにEdgeCollider2Dコンポーネントを追加
-        lineObj.AddComponent<EdgeCollider2D>();
-        //lineObjを自身（Stroke）の子要素に設定
-        lineObj.transform.SetParent(transform);
-        _initRenderer();
+        CreateLineObject();
     }
 
-    //LineRenderer初期化関数
-
-    private void _initRenderer()
-    {
-        //LineRendererを取得
-        lineRenderer = lineObj.GetComponent<LineRenderer>();
-        //ポジションカウントをリセット
-        lineRenderer.positionCount = 0;
-        //マテリアルを設定
-        lineRenderer.material = lineMaterial;
-        //マテリアルの色を設定
-        lineRenderer.material.color = lineColor;
-        //始点の太さを設定
-        lineRenderer.startWidth = lineWidth;
-        //終点の太さを設定
-        lineRenderer.endWidth = lineWidth;
-    }
-    //lineRenderer更新処理
-
-    private void _addPositionDataToLineRenderer()
+    //描画更新
+    private void UpdateStroke()
     {
         /*座標に関する処理*/
         //マウス座標取得
@@ -81,16 +59,35 @@ public class StrokeController : MonoBehaviour
         //ワールド座標へ変換
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
-        /*LineRendererに関する処理*/
-        //LineRendererのポイントを増やす
-        lineRenderer.positionCount += 1;
-        //LineRendererのポジションを設定
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, worldPos);
+        //描画中のラインにポイントを追加
+        currentLine.AddPoint(worldPos);
+    }
 
-        /*EdgeCollider2Dに関する処理*/
-        //ワールド座標をリストに追加
-        linePoints.Add(worldPos);
-        //EdgeCollider2Dのポイントを設定
-        lineObj.GetComponent<EdgeCollider2D>().SetPoints(linePoints);
+    //描画終了
+    private void EndStroke()
+    {
+        //描画中のラインを確定させる
+        currentLine.Build();
+
+        //完成したラインの情報を確認
+        Debug.Log("角の数: " + currentLine.CornerCount);
+        Debug.Log("交差の数: " + currentLine.CrossCount);
+
+        //どこか1箇所でも交差していればループしているとみなせる
+        Debug.Log("ループ: " + (currentLine.CrossCount > 0));
+    }
+
+    //ライン描画用ゲームオブジェクト作成
+    private void CreateLineObject()
+    {
+        //ゲームオブジェクトを作成しライン制御用コンポーネント追加
+        //同時に追加したコンポーネントを現在描画中のラインとして変数に保持
+        currentLine = new GameObject("Line").AddComponent<LineController>();
+        currentLine.transform.SetParent(transform); //自身の子に追加
+        currentLine.Initialize(lineSettings); //初期化
+
+        //描画したラインのリストに追加
+        //あとで古いラインの情報を取得したり消したりするときに使えるように
+        lines.Add(currentLine);
     }
 }
