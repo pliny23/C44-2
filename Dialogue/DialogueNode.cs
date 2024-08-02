@@ -33,8 +33,7 @@ namespace RPG.Dialogue
         string onEnterAction;
         [SerializeField]
         string onExitAction;
-        [SerializeField]
-        Condition condition;
+
 
         public Rect GetRect()
         {
@@ -104,11 +103,6 @@ namespace RPG.Dialogue
         public string GetOnExitAction()
         {
             return onExitAction;
-        }
-
-        public bool CheckCondition(IEnumerable<IPredicateEvaluator> evaluators)
-        {
-            return condition.Check(evaluators);
         }
 
 #if UNITY_EDITOR

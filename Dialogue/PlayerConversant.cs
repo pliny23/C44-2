@@ -117,7 +117,9 @@ namespace RPG.Dialogue
 
         public void Next()
         {
-            int numPlayerResponses = FilterOnCondition(currentDialogue.GetPlayerChildren(currentNode)).Count();
+            //★このコード１行を以前に戻したい
+            int numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();
+
             if (numPlayerResponses > 0)
             {
                 // プレイヤーのレスポンスがある場合、選択モードに移行して会話更新イベントを呼び出す
@@ -150,23 +152,8 @@ namespace RPG.Dialogue
 
         public bool HasNext()
         {
-            return FilterOnCondition(currentDialogue.GetAllChildren(currentNode)).Count() > 0;
-        }
+            return currentDialogue.GetAllChildren(currentNode).Count() > 0;
 
-        private IEnumerable<DialogueNode> FilterOnCondition(IEnumerable<DialogueNode> inputNode)
-        {
-            foreach (var node in inputNode)
-            {
-                if (node.CheckCondition(GetEvaluators()))
-                {
-                    yield return node;
-                }
-            }
-        }
-
-        private IEnumerable<IPredicateEvaluator> GetEvaluators()
-        {
-            return GetComponents<IPredicateEvaluator>();
         }
 
         private void TriggerEnterAction()
